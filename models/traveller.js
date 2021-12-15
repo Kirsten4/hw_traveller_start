@@ -18,16 +18,20 @@ Traveller.prototype.getJourneysByTransport = function (transport) {
 };
 
 Traveller.prototype.getJourneysByMinDistance = function (minDistance) {
-  const result = this.journeys.filter(journey => journey.distance > minDistance);
-  return result
+  return this.journeys.filter(journey => journey.distance > minDistance);
 };
 
 Traveller.prototype.calculateTotalDistanceTravelled = function () {
-
+ return this.journeys.reduce((runningTotal, journey) => runningTotal + journey.distance ,0)
 };
 
 Traveller.prototype.getUniqueModesOfTransport = function () {
 
+  const transportTypes = this.journeys.map(transportType => transportType.transport);
+
+  const uniqueTransport = transportTypes.filter((transport, index, transportTypes) => transportTypes.indexOf(transport) === index);
+  
+  return uniqueTransport
 };
 
 
